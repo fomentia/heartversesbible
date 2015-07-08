@@ -6,7 +6,7 @@ defmodule BibleParserTest do
     <bible>
       <book name="Gen">
         <chapter num="1">
-          <verse stuff="bizness" num="1">In the beginning God created the heaven and the earth.</verse>
+          <verse num="1">In the beginning God created the heaven and the earth.</verse>
           <verse num="2">And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.</verse>
         </chapter>
         <chapter num="2">
