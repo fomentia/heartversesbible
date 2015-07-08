@@ -1,2 +1,0 @@
-defmodule Xtract do
-end

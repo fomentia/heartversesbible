@@ -1,4 +1,4 @@
-defmodule XtractTest do
+defmodule BibleParserTest do
   use ExUnit.Case
 
   def example_xml do
@@ -27,8 +27,8 @@ defmodule XtractTest do
     ]
   end
 
-  test "Xtract.Parser.parse/1 idealizes XML" do
-    xtracted_data = Xtract.Parser.parse(example_xml)
+  test "BibleParser.Parser.parse/1 idealizes XML" do
+    xtracted_data = BibleParser.Parser.parse(example_xml)
     assert xtracted_data == verses_table()
   end
 end

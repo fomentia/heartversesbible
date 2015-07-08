@@ -1,4 +1,4 @@
-defmodule Xtract.Parser do
+defmodule BibleParser.Parser do
   require Record
   require Logger
 
@@ -11,14 +11,6 @@ defmodule Xtract.Parser do
   def parse(xml) do
     {doc, _} = xml |> :binary.bin_to_list |> :xmerl_scan.string
     all_elements = :xmerl_xpath.string('.', doc)
-
-    repeated_elements = Enum.map(all_elements, fn(elem) ->
-      name = xmlElement(elem, :name)
-      each = "//#{name}"
-             |> String.to_char_list
-             |> :xmerl_xpath.string(doc)
-      each
-    end)
 
     nodes = Enum.map(all_elements, fn(elem) ->
       represent(xmlElement(elem, :content))
@@ -34,7 +26,7 @@ defmodule Xtract.Parser do
     attribute = xmlElement(node, :attributes) |> List.first |> represent_attr
     content = xmlElement(node, :content)
 
-    @data ++ Map.put(%{}, name, [[attrs: attribute], [content: represent(content)]])
+    Map.merge(@data, Map.put(%{}, name, [[attrs: attribute], [content: represent(content)]]))
   end
 
   defp represent(node) when Record.is_record(node, :xmlText) do
