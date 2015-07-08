@@ -10,49 +10,37 @@ defmodule BibleParser.Parser do
 
   def parse(xml) do
     {doc, _} = xml |> :binary.bin_to_list |> :xmerl_scan.string
-    elements = :xmerl_xpath.string('//verse', doc)
 
-    nodes = Enum.map(elements, fn(elem) ->
-      represent(elem)
-    end)
+    :xmerl_xpath.string('//book', doc) |> Enum.reduce([], fn(book_node, acc) ->
+      book_attributes = get_attributes_for(book_node)
+      :xmerl_xpath.string('//chapter', book_node) |> Enum.reduce(acc, fn(chapter_node, acc) ->
+        chapter_attributes = get_attributes_for(chapter_node)
+        :xmerl_xpath.string('//verse', chapter_node) |> Enum.reduce(acc, fn(verse_node, acc) ->
+          verse_attributes = get_attributes_for(verse_node)
+          raw_verse_text = xmlElement(verse_node, :content)
+          verse_text = represent_text(List.first(raw_verse_text)) |> List.to_string
 
-    nodes
-  end
-
-  def represent(node) when Record.is_record(node, :xmlElement) do
-    name = xmlElement(node, :name)
-    attributes = xmlElement(node, :attributes)
-    content = xmlElement(node, :content)
-    parents = xmlElement(node, :parents)
-
-    chapter_num = List.first(parents) |> Tuple.to_list |> List.last |> div(2)
-    verse_num = List.first(attributes) |> represent_attr
-
-    @data ++ [chapter: chapter_num, verse: verse_num, text: represent(content)]
-    # @data ++ [book: book_name, chapter: chapter_num, verse: verse_num, text: represent(content)]
-  end
-
-  def represent(node) when Record.is_record(node, :xmlText) do
-    string_content = xmlText(node, :value) |> to_string
-  end
-
-  def represent(node) when is_list(node) do
-    case Enum.map(node, &(represent(&1))) do
-      [text_content] when is_binary(text_content) ->
-        text_content
-
-      elements ->
-        Enum.reduce(elements, [], fn(x, acc) ->
-          if is_list(x) do
-            Keyword.merge(acc, x)
-          else
-            acc
-          end
+          acc ++ [[book: List.to_string(book_attributes[:name]),
+                   chapter: List.to_integer(chapter_attributes[:num]),
+                   verse: List.to_integer(verse_attributes[:num]),
+                   text: verse_text]]
         end)
-    end
+      end)
+    end)
   end
 
-  def represent_attr({:xmlAttribute, key, _, _, _, _, _, _, value, _}) do
-    value
+  def get_attributes_for(node) do
+    raw_attributes = xmlElement(node, :attributes)
+    attributes = Enum.reduce(raw_attributes, %{}, fn(attr, acc) ->
+      represent_attr(attr, acc)
+    end)
+  end
+
+  def represent_attr({:xmlAttribute, key, _, _, _, _, _, _, value, _}, map) do
+    Map.put(map, key, value)
+  end
+
+  def represent_text({:xmlText, _, _, _, text, _}) do
+    text
   end
 end
