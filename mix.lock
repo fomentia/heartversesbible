@@ -1,0 +1,5 @@
+%{"amrita": {:git, "git://github.com/josephwilk/amrita.git", "f51ae5225fb77ed0238e29fc80dbfa95e77c3ceb", []},
+  "hoedown": {:git, "git://github.com/hoedown/hoedown.git", "d52bd1ca0f2de3fa946873831d25e85440aa8cda", []},
+  "markdown": {:git, "git://github.com/devinus/markdown.git", "cd0df79b6f1cc374499d47f6ba6aaab5096f874f", []},
+  "meck": {:git, "git://github.com/eproxus/meck.git", "fc362e037f424250130bca32d6bf701f2f49dc75", [branch: "master"]},
+  "sweet_xml": {:git, "git://github.com/gniquil/sweet_xml.git", "f8480f423c5b2799060e7747718c51bf044bfc15", []}}
