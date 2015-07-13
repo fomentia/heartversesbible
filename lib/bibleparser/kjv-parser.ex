@@ -8,8 +8,9 @@ defmodule BibleParser.KJVParser do
 
   @data Keyword.new
 
-  def parse(xml) do
-    {doc, _} = xml |> :binary.bin_to_list |> :xmerl_scan.string
+  def parse(xml, is_file \\ false) do
+    xml_bitstring = xml |> :binary.bin_to_list
+    {doc, _} = if(is_file, do: :xmerl_scan.file(xml_bitstring), else: :xmerl_scan.string(xml_bitstring))
 
     :xmerl_xpath.string('//book', doc) |> Enum.reduce([], fn(book_node, acc) ->
       book_attributes = get_attributes_for(book_node)

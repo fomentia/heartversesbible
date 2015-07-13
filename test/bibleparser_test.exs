@@ -1,10 +1,10 @@
 defmodule BibleParserTest do
   use ExUnit.Case
 
-  def example_xml do
+  def example_xml_string do
     """
     <bible>
-      <book name="Gen">
+      <book num="Gen">
         <chapter num="1">
           <verse num="1">In the beginning God created the heaven and the earth.</verse>
           <verse num="2">And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.</verse>
@@ -27,8 +27,13 @@ defmodule BibleParserTest do
     ]
   end
 
-  test "BibleParser.Parser.parse/1 idealizes XML" do
-    xtracted_data = BibleParser.Parser.parse(example_xml)
+  test "BibleParser.KJVParser.parse/1 can parse strings" do
+    xtracted_data = BibleParser.KJVParser.parse(example_xml_string)
+    assert xtracted_data == verses_table()
+  end
+
+  test "BibleParser.KJVParser.parse/1 can parse files" do
+    xtracted_data = BibleParser.KJVParser.parse("example_kjv_file.xml", is_file: true)
     assert xtracted_data == verses_table()
   end
 end
