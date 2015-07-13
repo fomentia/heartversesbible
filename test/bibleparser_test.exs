@@ -20,10 +20,10 @@ defmodule BibleParserTest do
 
   def verses_table do
     [
-      [ book: "Gen", chapter: 1, verse: 1, text: "In the beginning God created the heaven and the earth." ],
-      [ book: "Gen", chapter: 1, verse: 2, text: "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters." ],
-      [ book: "Gen", chapter: 2, verse: 1, text: "Thus the heavens and the earth were finished, and all the host of them." ],
-      [ book: "Gen", chapter: 2, verse: 2, text: "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made." ],
+      %{ :book => "Gen", :chapter => 1, :verse => 1, :text => "In the beginning God created the heaven and the earth." },
+      %{ :book => "Gen", :chapter => 1, :verse => 2, :text => "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters." },
+      %{ :book => "Gen", :chapter => 2, :verse => 1, :text => "Thus the heavens and the earth were finished, and all the host of them." },
+      %{ :book => "Gen", :chapter => 2, :verse => 2, :text => "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made." },
     ]
   end
 
