@@ -1,4 +1,4 @@
-defmodule BibleParser.Parser do
+defmodule BibleParser.KJVParser do
   require Record
   require Logger
 
@@ -20,7 +20,7 @@ defmodule BibleParser.Parser do
           raw_verse_text = xmlElement(verse_node, :content)
           verse_text = represent_text(List.first(raw_verse_text)) |> List.to_string
 
-          acc ++ [%{:book => List.to_string(book_attributes[:name]),
+          acc ++ [%{:book => List.to_string(book_attributes[:num]),
                    :chapter => List.to_integer(chapter_attributes[:num]),
                    :verse => List.to_integer(verse_attributes[:num]),
                    :text => verse_text}]
