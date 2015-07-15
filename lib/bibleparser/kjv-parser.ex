@@ -25,7 +25,7 @@ defmodule BibleParser.KJVParser do
           verse = List.to_integer(verse_attributes[:num])
           text = represent_text(List.first(raw_verse_text)) |> List.to_string
 
-          acc <> "INSERT INTO #{sql_table_name} VALUES ('#{book}', #{chapter}, #{verse}, '#{text}')\n"
+          acc <> "INSERT INTO #{sql_table_name} VALUES ('KJV', '#{book}', #{chapter}, #{verse}, '#{text}')\n"
         end)
       end)
     end)
