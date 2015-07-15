@@ -1,2 +1,2 @@
 /Users/isaacjw/Documents/Programming/Elixir/bibleparser/_build/dev/lib/bibleparser/ebin/Elixir.BibleParser.beam	Elixir.BibleParser	lib/bibleparser.ex	Elixir
-_build/dev/lib/bibleparser/ebin/Elixir.BibleParser.KJVParser.beam	Elixir.BibleParser.KJVParser	lib/bibleparser/kjv-parser.ex	Elixir.Access	Elixir.Enum	Elixir.Kernel	Elixir.Keyword	Elixir.List	Elixir.Logger	Elixir.Map	Elixir.Module	Elixir.Record	binary	erlang	xmerl_scan	xmerl_xpath	Elixir
+_build/dev/lib/bibleparser/ebin/Elixir.BibleParser.KJVParser.beam	Elixir.BibleParser.KJVParser	lib/bibleparser/kjv-parser.ex	Elixir.Access	Elixir.Enum	Elixir.Kernel	Elixir.Keyword	Elixir.List	Elixir.Logger	Elixir.Map	Elixir.Module	Elixir.Record	Elixir.String.Chars	binary	erlang	xmerl_scan	xmerl_xpath	Elixir
